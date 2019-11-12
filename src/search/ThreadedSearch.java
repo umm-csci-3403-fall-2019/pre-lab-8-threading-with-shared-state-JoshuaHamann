@@ -59,13 +59,13 @@ public class ThreadedSearch<T> implements Searcher<T>, Runnable {
             //create and start thread i
             int begin = parsing * i;//i.e. parsing = 75/3 = 25 & i = 0; 25*0 = 0
             int end = (parsing*i++)-1;//i.e. parsing = 75/3 =25 & i =0; 25*(i+1)-1= 24
-            ThreadedSearch find = new ThreadedSearch(target,list,begin,end,answer);
+            ThreadedSearch<T> find = new ThreadedSearch<>(target,list,begin,end,answer);
             threads[i] = new Thread(find);
             threads[i].start();
         }
 
         //wait for all the threads to finish
-        for(int i = 0;i<numThreads;i++){
+        for(int i = 0;i<numThreads;i++) {
             threads[i].join();
         }
 
